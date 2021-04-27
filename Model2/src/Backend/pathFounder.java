@@ -2,6 +2,8 @@ package Backend;
 
 import java.util.ArrayList;
 
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+
 import Graphs.myGraph;
 
 public class pathFounder {
@@ -25,8 +27,8 @@ public class pathFounder {
 		Path = path;
 	}
 	
-	public int foundPath(int start, int end, ArrayList<Integer> oldPlaces, int distance) {
-		if(start == end) {
+	public void foundPath(int start, int end, ArrayList<Integer> oldPlaces, int distance) {
+		/*if(start == end) {
 			return distance +1;
 		}
 		ArrayList<Integer> distances = new ArrayList<Integer>();
@@ -46,6 +48,10 @@ public class pathFounder {
 		}
 		distance = distance +min ;
 		return distance;
+		*/
+		DijkstraShortestPath<Integer,String> dsp = new DijkstraShortestPath<Integer, String>(graph);
+		dsp.getPath(1,11);
+		//dsp.getPath(1,11).getEdgeList().stream().forEach(System.out::println);
 	}
 	public void showPath() {
 		for(int i =0; i< Path.size(); i++) {

@@ -12,7 +12,7 @@ public class firstModel extends myGraph{
 	}
 	private void generateVertex(int vertexQuantity) {
 		for(int i =1 ; i<= vertexQuantity; i++) {
-			V.add(i);
+			addVertex(i);
 		}
 	}
 	private void generateMyFirstModel(int edgeQuantity) {

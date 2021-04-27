@@ -19,7 +19,7 @@ public class backendManager {
 		//IM.showMatrix();
 		pf = new pathFounder(graphMG.getGraph());
 		ArrayList<Integer> Path = new ArrayList<Integer>();
-		System.out.println(pf.foundPath(1, 9, Path, 0));
+		pf.foundPath(1, 9, Path, 0);
 		//pf.showPath();
 		
 		
