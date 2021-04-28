@@ -22,7 +22,9 @@ public class intensityMatrix {
 	public void showMatrix() {
 		guiManager GUI = new guiManager(matrix,size);
 		GUI.drawMatrix();
-		
+	}
+	public int[][] getMatrix(){
+		return matrix;
 	}
 
 }
