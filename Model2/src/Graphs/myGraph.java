@@ -3,6 +3,7 @@ package Graphs;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Supplier;
 
 import org.jgrapht.Graph;
@@ -132,8 +133,17 @@ public class myGraph implements Graph<Integer,String> {
 	}
 	@Override
 	public Set<String> incomingEdgesOf(Integer vertex) {
-		// TODO Auto-generated method stub
-		return null;
+		TreeSet<String> result = new TreeSet<String>();
+		for(int i=0; i<E.size();i++) {
+			if(getEdgeTarget(E.get(i))==vertex) {
+				result.add(Integer.toString(getEdgeSource(E.get(i))) + ";" +Integer.toString(getEdgeTarget(E.get(i))));
+			}
+			if(getEdgeSource(E.get(i))==vertex) {
+				result.add(Integer.toString(getEdgeSource(E.get(i))) + ";" +Integer.toString(getEdgeTarget(E.get(i))));
+			}
+		}
+		
+		return result;
 	}
 	@Override
 	public int outDegreeOf(Integer vertex) {
@@ -142,8 +152,17 @@ public class myGraph implements Graph<Integer,String> {
 	}
 	@Override
 	public Set<String> outgoingEdgesOf(Integer vertex) {
-		// TODO Auto-generated method stub
-		return null;
+		TreeSet<String> result = new TreeSet<String>();
+		for(int i=0; i<E.size();i++) {
+			if(getEdgeTarget(E.get(i))==vertex) {
+				result.add(Integer.toString(getEdgeSource(E.get(i))) + ";" +Integer.toString(getEdgeTarget(E.get(i))));
+			}
+			if(getEdgeSource(E.get(i))==vertex) {
+				result.add(Integer.toString(getEdgeSource(E.get(i))) + ";" +Integer.toString(getEdgeTarget(E.get(i))));
+			}
+		}
+		
+		return result;
 	}
 	@Override
 	public boolean removeAllEdges(Collection<? extends String> edges) {

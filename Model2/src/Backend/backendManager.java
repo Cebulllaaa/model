@@ -2,12 +2,14 @@ package Backend;
 
 import java.util.ArrayList;
 
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+
 import Graphs.graphManager;
 
 public class backendManager {
 	private graphManager graphMG;
 	public intensityMatrix IM;
-	private pathFounder pf;
+	private DijkstraShortestPath<Integer,String> dsp;
 	
 	
 	public backendManager(graphManager x) {
@@ -15,11 +17,10 @@ public class backendManager {
 		IM = new intensityMatrix();
 	}
 	public void start() {
-		IM.generateMatrix(graphMG.getGraph().E.size(),31,1);
-		//IM.showMatrix();
-		pf = new pathFounder(graphMG.getGraph());
-		ArrayList<Integer> Path = new ArrayList<Integer>();
-		pf.foundPath(1, 9, Path, 0);
+		IM.generateMatrix(graphMG.getGraph().V.size(),31,1);
+		IM.showMatrix();
+		dsp = new DijkstraShortestPath<Integer, String>(graphMG.getGraph());
+		dsp.getPath(1,14).getEdgeList().stream().forEach(System.out::println);
 		//pf.showPath();
 		
 		

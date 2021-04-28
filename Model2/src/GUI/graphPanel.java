@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 import Graphs.graphManager;
 
-public class myPanel extends JPanel{
+public class graphPanel extends JPanel{
 	private Graphics g;
 	public graphManager graphMG;
 	private ArrayList<String> firstPoints = new ArrayList<String>();
