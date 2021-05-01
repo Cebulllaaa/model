@@ -14,12 +14,12 @@ public class capacityFunctions {
 	private List<String> path;
 	public capacityFunctions(DijkstraShortestPath<Integer,String> dsp,myGraph graph,int[][] matrix) {
 		this.dsp = dsp;
-		this.graph = graph;
+		this.graph =  (myGraph) graph;
 		this.matrix = matrix;
 		
 	}
 	public int C(String edge) {
-		return 1800;
+		return 10000;
 	}
 	public int A(String edge) {
 		int result =0;
@@ -43,6 +43,14 @@ public class capacityFunctions {
 			}
 		}
 		return result;
+	}
+	public boolean check() {
+		for(int i=0; i< graph.E.size(); i++) {
+			if(A(graph.E.get(i))> C(graph.E.get(i))) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

@@ -8,13 +8,13 @@ public class intensityMatrix {
 	//od zrodla (1 tablica) do ujscia (2tablica) 
 	private int [][] matrix ;
 	private int size;
-	public void generateMatrix(int matrixSize, int datasSize, int time) {
+	public void generateMatrix(int matrixSize, int datasSize, int time,int left) {
 		this.size = matrixSize;
 		matrix = new int[size][size];
 		Random rd = new Random();
 		for(int i =0 ; i < size ; i++) {
 			for (int j =0; j < size ; j++) {
-				matrix[i][j] =( rd.nextInt(datasSize) +1)/time ;
+				matrix[i][j] =( rd.nextInt(datasSize) +left)/time ;
 			}
 		}
 		

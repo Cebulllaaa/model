@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphType;
 
-public class myGraph implements Graph<Integer,String> {
+public class myGraph implements Graph<Integer,String>, Cloneable {
 	public ArrayList<Integer> V;
 	public ArrayList<String> E;
 	public void showGraph() {
@@ -238,4 +238,8 @@ public class myGraph implements Graph<Integer,String> {
 		// TODO Auto-generated method stub
 		
 	}
+	 public myGraph clone() throws CloneNotSupportedException
+	    {
+	        return (myGraph) super.clone();
+	    }
 }
