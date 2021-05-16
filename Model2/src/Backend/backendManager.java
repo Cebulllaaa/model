@@ -23,7 +23,7 @@ public class backendManager {
 	}
 	public void firstExperiment() {
 		
-		IM.generateStaticMatrix(graphMG.getGraph().V.size(),1,32,37);
+		IM.generateStaticMatrix(graphMG.getGraph().V.size(),1,32,64);
 		IM.showMatrix();
 		dsp = new DijkstraShortestPath<Integer, String>(graphMG.getGraph());
 		//dsp.getPath(4, 11).getEdgeList().stream().forEach(System.out::println);;
@@ -33,8 +33,8 @@ public class backendManager {
 		int capacityErrors =0;
 		int delayErrors= 0;
 		int breakErrors=0;
-		for(int i=0 ; i < 100; i++) {
-			rm = new reliabilityManager(0.01,IM.getMatrix(),0.07,cf, IM.size);
+		for(int i=0 ; i < 100000; i++) {
+			rm = new reliabilityManager(0.01,IM.getMatrix(),0.0011,cf, IM.size);
 				try {
 					int x =rm.checkReliability(1);
 					if(x==1) {
@@ -55,7 +55,7 @@ public class backendManager {
 				}
 				System.out.println("Nastepny " + i);
 			}
-		System.out.println("Na 100 jest " + countSucces + " przypadkow sukcesu ");
+		System.out.println("Na 100000 jest " + countSucces + " przypadkow sukcesu ");
 		System.out.println(delayErrors + " przypadkow keidy T >= T_max");
 		System.out.println(capacityErrors + " przypadkow kiedy C(edge < A(edge)");
 		System.out.println(breakErrors + " przypadkow keidy doszlo do przerwania sieci");

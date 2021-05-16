@@ -23,7 +23,7 @@ public class capacityFunctions {
 		
 	}
 	public int C(String edge) {
-		return 120000;
+		return 6800;
 	}
 	public void generateStream() {
 		for (String edge : graph.E) 
@@ -58,7 +58,7 @@ public class capacityFunctions {
 	public boolean check() {
 		for (String edge : graph.E) 
 		{ 
-			if(C(edge) < stream.get(edge)) {
+			if(C(edge) <= stream.get(edge)) {
 				return false;
 			}
 		}

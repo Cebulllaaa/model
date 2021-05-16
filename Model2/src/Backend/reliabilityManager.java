@@ -25,23 +25,25 @@ public class reliabilityManager {
 		//dodaj sprawdzenie czy siec jest rozerwana => poprawione
 		//dodaj tu sprawdzenie czy C(edge) > A(edge) => poprawione
 		accident();
+		boolean breakCorrect =checkBreak();
+		if(!breakCorrect) {
+			return -2;
+		}
+		boolean capacityCorrect = checkCapacity();
+		
+		if(!capacityCorrect) {
+			return -1;
+		}
 		T= SUM_e(packageSize) ;
 		T= T/getMatrixSum();
 		System.out.println(T);
-		boolean breakCorrect =checkBreak();
-		boolean capacityCorrect = checkCapacity();
-		if(breakCorrect && capacityCorrect && T < T_max ) {
+		if( T < T_max ) {
 			return 1;
 		}
-		else if(breakCorrect && capacityCorrect) {
+		else  {
 			return 0;
 		}
-		else if(breakCorrect) {
-			return -1;
-		}
-		else {
-			return -2;
-		}
+		
 	}
 	private int getMatrixSum() {
 		int result =0;
@@ -75,9 +77,11 @@ public class reliabilityManager {
 		
 	}
 	public int getAverage() {
-		int result= getMatrixSum()/size;
-		result = result /size;
-		return result;
+	//	int result= getMatrixSum()/size;
+	//	result = result /size;
+	//	return result;
+		return 1;
+	
 	}
 	private boolean checkBreak() {
 		for (int vertex : graph.V) 
