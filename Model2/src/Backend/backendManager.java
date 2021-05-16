@@ -29,7 +29,7 @@ public class backendManager {
 		int count =0;
 		int count2 =0;
 		for(int i=0 ; i < 100; i++) {
-			rm = new reliabilityManager(0.01,IM.getMatrix(),0.1,cf);
+			rm = new reliabilityManager(0.01,IM.getMatrix(),0.1,cf,IM.size);
 			if(cf.check()) {
 				count2 = count2 +1;
 				try {
@@ -47,7 +47,30 @@ public class backendManager {
 		System.out.println("Na 100 jest " + count + " przypadkow sukcesu " + count2);
 	}
 	public void firstExperiment() {
-		IM.generateMatrix(graphMG.getGraph().V.size(),31,1);
+		IM.generateStaticMatrix(graphMG.getGraph().V.size(),1,32,37);
+		IM.showMatrix();
+		dsp = new DijkstraShortestPath<Integer, String>(graphMG.getGraph());
+		//dsp.getPath(4, 11).getEdgeList().stream().forEach(System.out::println);;
+		cf = new capacityFunctions(dsp,graphMG.getGraph(),IM.getMatrix());
+		int count =0;
+		int count2 =0;
+		for(int i=0 ; i < 100; i++) {
+			rm = new reliabilityManager(0.1,IM.getMatrix(),0.0056,cf, IM.size);
+			if(cf.check()) {
+				count2 = count2 +1;
+				try {
+					boolean x =rm.checkReliability(1);
+					if(x) {
+						count = count +1;
+					}
+				}
+				catch(Exception e) {
+					System.out.println("Doszlo do calkowitego wyizolowania pewnego wezla");
+				}
+			}
+			System.out.println("Nastepny " + i);
+		}
+		System.out.println("Na 100 jest " + count + " przypadkow sukcesu " + count2);
 	}
 	
 }

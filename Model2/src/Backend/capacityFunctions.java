@@ -19,7 +19,7 @@ public class capacityFunctions {
 		
 	}
 	public int C(String edge) {
-		return 10000;
+		return 120000;
 	}
 	public int A(String edge) {
 		int result =0;

@@ -14,7 +14,8 @@ public class main {
 		GM = new guiManager(graphMG);
 		GM.drawGraph();
 		BM = new backendManager(graphMG);
-		BM.start();
+		//BM.start();
+		BM.firstExperiment();
 		
 	}
 }

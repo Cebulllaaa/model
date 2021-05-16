@@ -28,6 +28,9 @@ public class firstModel extends myGraph{
 		addLine(14,11);
 		addLine(9,11);
 	}
+	public void addEdge(int left,int right) {
+		addLine(left,right);
+	}
 	
 	
 	
