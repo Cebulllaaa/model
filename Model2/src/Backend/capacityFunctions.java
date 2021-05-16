@@ -1,6 +1,8 @@
 package Backend;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
@@ -12,16 +14,27 @@ public class capacityFunctions {
 	private myGraph graph;
 	private int[][] matrix;
 	private List<String> path;
+	private Map<String, Integer> stream ;
 	public capacityFunctions(DijkstraShortestPath<Integer,String> dsp,myGraph graph,int[][] matrix) {
 		this.dsp = dsp;
 		this.graph =  (myGraph) graph;
 		this.matrix = matrix;
+		stream = new HashMap<String, Integer>();
 		
 	}
 	public int C(String edge) {
 		return 120000;
 	}
-	public int A(String edge) {
+	public void generateStream() {
+		for (String edge : graph.E) 
+		{ 
+			stream.put(edge, A(edge));
+		}
+	}
+	public int getStream(String edge) {
+		return stream.get(edge);
+	}
+	private int A(String edge) {
 		int result =0;
 		int first ;
 		int second ;
@@ -32,8 +45,6 @@ public class capacityFunctions {
 					second = graph.V.get(j);
 					path =dsp.getPath(first,second).getEdgeList();
 					if(path.contains(edge)) {
-						//System.out.println("Next");
-						//System.out.println("First " + first + " second " + second);
 						result = result + matrix[first-1][second-1];
 						result = result + matrix[second-1][first-1];
 						//dsp.getPath(first,second).getEdgeList().stream().forEach(System.out::println);
@@ -45,8 +56,9 @@ public class capacityFunctions {
 		return result;
 	}
 	public boolean check() {
-		for(int i=0; i< graph.E.size(); i++) {
-			if(A(graph.E.get(i))> C(graph.E.get(i))) {
+		for (String edge : graph.E) 
+		{ 
+			if(C(edge) < stream.get(edge)) {
 				return false;
 			}
 		}

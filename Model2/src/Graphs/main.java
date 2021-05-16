@@ -16,6 +16,7 @@ public class main {
 		BM = new backendManager(graphMG);
 		//BM.start();
 		BM.firstExperiment();
+		//BM.corrected();
 		
 	}
 }

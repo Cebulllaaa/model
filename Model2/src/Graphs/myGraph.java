@@ -96,7 +96,9 @@ public class myGraph implements Graph<Integer,String>, Cloneable {
 	}
 	@Override
 	public boolean containsEdge(Integer sourceVertex, Integer targetVertex) {
-		// TODO Auto-generated method stub
+		if(E.contains(Integer.toString(sourceVertex) + ";" + Integer.toString(targetVertex)) || E.contains(Integer.toString(targetVertex) + ";" + Integer.toString(sourceVertex) )) {
+			return true;
+		}
 		return false;
 	}
 	@Override

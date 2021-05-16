@@ -20,15 +20,28 @@ public class reliabilityManager {
 		this.cf =cf;
 		this.size = size;
 	}
-	public boolean checkReliability(int packageSize) {
+	public int checkReliability(int packageSize) {
 		double T;
+		//dodaj sprawdzenie czy siec jest rozerwana => poprawione
+		//dodaj tu sprawdzenie czy C(edge) > A(edge) => poprawione
 		accident();
-		//dodaj sprawdzenie czy siec jest rozerwana
-		//dodaj tu sprawdzenie czy C(edge) > A(edge)
 		T= SUM_e(packageSize) ;
 		T= T/getMatrixSum();
 		System.out.println(T);
-		return (T<T_max && T>=0);
+		boolean breakCorrect =checkBreak();
+		boolean capacityCorrect = checkCapacity();
+		if(breakCorrect && capacityCorrect && T < T_max ) {
+			return 1;
+		}
+		else if(breakCorrect && capacityCorrect) {
+			return 0;
+		}
+		else if(breakCorrect) {
+			return -1;
+		}
+		else {
+			return -2;
+		}
 	}
 	private int getMatrixSum() {
 		int result =0;
@@ -43,8 +56,8 @@ public class reliabilityManager {
 	private double SUM_e(int packageSize) {
 		double result =0;
 		for(int i=0; i< graph.E.size(); i++) {
-			//Raz wyliczyc przeplyw i zapisac 
-			result = result + (cf.A(graph.E.get(i)) / ((cf.C(graph.E.get(i))/getAverage())-cf.A(graph.E.get(i))   ));
+			//Zamiast wyliczac A przy kazdym wywolaniu, wyliczyc raz i zapisac => poprawione
+			result = result + (cf.getStream(graph.E.get(i)) / ((cf.C(graph.E.get(i))/getAverage())-cf.getStream(graph.E.get(i))   ));
 		}
 		
 		return result;
@@ -64,7 +77,26 @@ public class reliabilityManager {
 	public int getAverage() {
 		int result= getMatrixSum()/size;
 		result = result /size;
-		//System.out.println("Result " + result);
 		return result;
+	}
+	private boolean checkBreak() {
+		for (int vertex : graph.V) 
+		{ 
+			boolean empty = true;
+			for(int i=0; i< graph.V.size(); i++) {
+				
+				if(graph.containsEdge(vertex, graph.V.get(i))) {
+					empty = false;
+					i = graph.V.size();
+				}
+			}
+			if(empty) {
+				return false;
+			}
+		}
+		return true;
+	}
+	private boolean checkCapacity() {
+		return cf.check();
 	}
 }
